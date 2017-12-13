@@ -165,6 +165,7 @@ passport.use(
         "id",
         "displayName",
         "email",
+        "photos",
         "birthday",
         "friends",
         "first_name",
@@ -178,7 +179,10 @@ passport.use(
       const facebookId = profile.id;
       const displayName = profile.displayName;
       const email = profile._json.email;
-      fbStuff = profile;
+      const photo = profile.photos[0].value;
+      console.log("photo:", photo);
+      console.log("*********");
+      fbStuff = photo;
 
       console.log(profile);
       console.log("*********");
@@ -230,7 +234,6 @@ app.get(
 );
 
 app.get("/status", (req, res) => {
-  fbStuff = JSON.stringify(fbStuff, null, 3);
   res.render("welcome/status", { fbStuff });
 });
 
